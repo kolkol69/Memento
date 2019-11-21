@@ -6,13 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="actionOverflowButtonStyle">@style/ActionButtonOverflow</item>
     </style>
 
     <!-- Splash Screen theme. -->
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/splash_background</item>
-        <!-- Optional, on Android 5+ you can modify the colorPrimaryDark color to match the windowBackground color for further branding-->
         <item name="colorPrimaryDark">@android:color/white</item>
+    </style>
+
+    <style name="ActionButtonOverflow" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/white</item>
     </style>
 
 </resources>
