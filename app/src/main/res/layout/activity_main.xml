@@ -47,5 +47,15 @@
 
             />
         </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fab"
+            app:layout_anchor="@id/pager"
+            app:layout_anchorGravity="bottom|right|end"
+            android:src="@drawable/baseline_add_white_36"
+            android:layout_margin="@dimen/fab_margin"
+            />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>
