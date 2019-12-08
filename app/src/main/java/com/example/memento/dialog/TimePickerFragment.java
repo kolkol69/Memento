@@ -2,10 +2,13 @@ package com.example.memento.dialog;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.EditText;
 import android.widget.TimePicker;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
@@ -15,11 +18,11 @@ import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
-    private EditText edTimeRef;
+    private EditText etTimeRef;
 
-    TimePickerFragment(EditText edTime){
+    TimePickerFragment(EditText etTime){
         super();
-        edTimeRef = edTime;
+        etTimeRef = etTime;
     }
 
 
@@ -38,6 +41,12 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Calendar timeCalendar = Calendar.getInstance();
         timeCalendar.set(0, 0, 0, hourOfDay, minute);
-        edTimeRef.setText(Utils.getTime(timeCalendar.getTimeInMillis()));
+        etTimeRef.setText(Utils.getTime(timeCalendar.getTimeInMillis()));
+    }
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        super.onCancel(dialog);
+        etTimeRef.setText(null);
     }
 }

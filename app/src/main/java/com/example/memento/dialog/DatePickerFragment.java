@@ -2,10 +2,12 @@ package com.example.memento.dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.memento.Utils;
@@ -30,6 +32,12 @@ public class DatePickerFragment extends DialogFragment{
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         return new DatePickerDialog(getActivity(), dateSetListener, year, month, day);
+    }
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        super.onCancel(dialog);
+        etDateRef.setText(null);
     }
 
     private DatePickerDialog.OnDateSetListener dateSetListener =
