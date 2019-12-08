@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.example.memento.adapter.TabAdapter;
 import com.example.memento.dialog.AddingTaskDialogFragment;
+import com.example.memento.fragment.CurrentTaskFragment;
+import com.example.memento.fragment.DoneTaskFragment;
+import com.example.memento.model.ModelTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -22,6 +25,10 @@ public class MainActivity extends AppCompatActivity
 
     FragmentManager fragmentManager;
     PreferenceHelper preferenceHelper;
+    TabAdapter tabAdapter;
+
+    CurrentTaskFragment currentTaskFragment;
+    DoneTaskFragment doneTaskFragment;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         tabLayout.addTab(tabLayout.newTab().setText(R.string.done_task));
 
         final ViewPager viewPager = findViewById(R.id.pager);
-        TabAdapter tabAdapter = new TabAdapter(fragmentManager, 2);
+        tabAdapter = new TabAdapter(fragmentManager, 2);
 
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -94,6 +101,10 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        currentTaskFragment = (CurrentTaskFragment)tabAdapter.getItem(TabAdapter.CURRENNT_TASK_FRAGMENNT_POSITION);
+        doneTaskFragment = (DoneTaskFragment) tabAdapter.getItem(TabAdapter.DONE_TASK_FRAGMENNT_POSITION);
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,8 +116,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onTaskAdded() {
-        Toast.makeText(this, "Task added!", Toast.LENGTH_LONG).show();
+    public void onTaskAdded(ModelTask newTask) {
+        currentTaskFragment.addTask(newTask);
     }
 
     @Override

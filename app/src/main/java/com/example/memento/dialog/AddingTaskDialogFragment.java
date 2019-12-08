@@ -18,7 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import com.example.memento.R;
+import com.example.memento.model.ModelTask;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Calendar;
 
 
 public class AddingTaskDialogFragment extends DialogFragment {
@@ -26,7 +29,7 @@ public class AddingTaskDialogFragment extends DialogFragment {
     private AddingTaskListener addingTaskListener;
 
     public interface AddingTaskListener {
-        void onTaskAdded();
+        void onTaskAdded(ModelTask newTask);
 
         void onTaskAddingCancel();
     }
@@ -74,6 +77,10 @@ public class AddingTaskDialogFragment extends DialogFragment {
 
         builder.setView(container);
 
+        final ModelTask task = new ModelTask();
+        final Calendar calendar = Calendar.getInstance();
+        calendar.set(calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) + 1);
+
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +88,7 @@ public class AddingTaskDialogFragment extends DialogFragment {
                 if (etDate.length() == 0) {
                     etDate.setText(" ");
                 }
-                DialogFragment datePickerFragment = new DatePickerFragment(etDate);
+                DialogFragment datePickerFragment = new DatePickerFragment(etDate, calendar);
                 datePickerFragment.show(getFragmentManager(), "DatePickerFragment");
             }
         });
@@ -93,7 +100,7 @@ public class AddingTaskDialogFragment extends DialogFragment {
                 if (etTime.length() == 0) {
                     etTime.setText(" ");
                 }
-                DialogFragment timePickerFragment = new TimePickerFragment(etTime);
+                DialogFragment timePickerFragment = new TimePickerFragment(etTime, calendar);
                 timePickerFragment.show(getFragmentManager(), "TimePickerFragment");
             }
         });
@@ -101,7 +108,11 @@ public class AddingTaskDialogFragment extends DialogFragment {
         builder.setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                addingTaskListener.onTaskAdded();
+                task.setTitle(etTitle.getText().toString());
+                if(etDate.length() != 0 || etTime.length() != 0){
+                    task.setDate(calendar.getTimeInMillis());
+                }
+                addingTaskListener.onTaskAdded(task);
                 dialog.dismiss();
             }
         });
@@ -141,7 +152,7 @@ public class AddingTaskDialogFragment extends DialogFragment {
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        if (etTitle.length() == 0) {
+                        if (s.length() == 0) {
                             positiveButton.setEnabled(false);
                             tilTitle.setError(getResources().getString(R.string.dialog_error_empty_title));
                         }

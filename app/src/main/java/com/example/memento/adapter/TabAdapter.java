@@ -11,10 +11,18 @@ import com.example.memento.fragment.DoneTaskFragment;
 public class TabAdapter extends FragmentStatePagerAdapter {
 
     private int numberOfTabs;
+    public static final int  CURRENNT_TASK_FRAGMENNT_POSITION = 0;
+    public static final int  DONE_TASK_FRAGMENNT_POSITION = 1;
+
+    private CurrentTaskFragment currentTaskFragment;
+    private DoneTaskFragment doneTaskFragment;
+
 
     public TabAdapter(@NonNull FragmentManager fm, int numberOfTabs) {
         super(fm);
         this.numberOfTabs = numberOfTabs;
+        currentTaskFragment = new CurrentTaskFragment();
+        doneTaskFragment = new DoneTaskFragment();
     }
 
     @NonNull
@@ -23,9 +31,9 @@ public class TabAdapter extends FragmentStatePagerAdapter {
 
         switch (i) {
             case 0:
-                return new CurrentTaskFragment();
+                return currentTaskFragment;
             case 1:
-                return new DoneTaskFragment();
+                return doneTaskFragment;
             default:
                 return null;
         }

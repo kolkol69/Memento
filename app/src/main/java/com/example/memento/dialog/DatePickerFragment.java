@@ -17,10 +17,12 @@ import java.util.Calendar;
 public class DatePickerFragment extends DialogFragment{
 
     private EditText etDateRef;
+    private Calendar calendar;
 
-    DatePickerFragment(EditText etDate){
+    DatePickerFragment(EditText etDate, Calendar calendar){
         super();
         etDateRef = etDate;
+        this.calendar = calendar;
     }
 
     @Override
@@ -43,9 +45,10 @@ public class DatePickerFragment extends DialogFragment{
     private DatePickerDialog.OnDateSetListener dateSetListener =
             new DatePickerDialog.OnDateSetListener() {
                 public void onDateSet(DatePicker view, int year, int month, int day) {
-                    Calendar dateCalendar = Calendar.getInstance();
-                    dateCalendar.set(year, month, day);
-                    etDateRef.setText(Utils.getDate(dateCalendar.getTimeInMillis()));
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DAY_OF_MONTH, day);
+                    etDateRef.setText(Utils.getDate(calendar.getTimeInMillis()));
                 }
             };
 }

@@ -19,10 +19,12 @@ import java.util.Calendar;
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
     private EditText etTimeRef;
+    private Calendar calendar;
 
-    TimePickerFragment(EditText etTime){
+    TimePickerFragment(EditText etTime, Calendar calendar){
         super();
         etTimeRef = etTime;
+        this.calendar = calendar;
     }
 
 
@@ -39,9 +41,10 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Calendar timeCalendar = Calendar.getInstance();
-        timeCalendar.set(0, 0, 0, hourOfDay, minute);
-        etTimeRef.setText(Utils.getTime(timeCalendar.getTimeInMillis()));
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+        etTimeRef.setText(Utils.getTime(calendar.getTimeInMillis()));
     }
 
     @Override

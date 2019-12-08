@@ -6,11 +6,13 @@
     tools:context=".fragment.DoneTaskFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done task"
-        android:layout_gravity="center"
-        android:textSize="35sp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDoneTask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:clipToPadding="false"
+        android:paddingBottom="88dp"
+        />
 
 </FrameLayout>

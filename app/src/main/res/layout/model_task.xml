@@ -14,7 +14,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_toRightOf="@id/tvTaskDate"
-        android:text="Title Title"
         android:textColor="@color/text_black"
         android:textSize="16sp" />
 
@@ -25,7 +24,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:gravity="right"
-        android:text="Date Date"
         android:textColor="@color/text_black"
         android:textSize="14sp" />
 
