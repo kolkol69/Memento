@@ -30,6 +30,7 @@
             android:layout_marginTop="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDialogTaskDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:cursorVisible="false"
@@ -47,6 +48,7 @@
             android:layout_marginTop="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDialogTaskTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:cursorVisible="false"
