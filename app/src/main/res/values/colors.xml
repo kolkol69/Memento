@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--<color name="primary_text_disabled_material_dark">#7f0a0027</color> &lt;!&ndash; Black 87% &ndash;&gt;-->
+    <!--<color name="primary_text_disabled_material_light">#7f0a0028</color> &lt;!&ndash; Black 54% &ndash;&gt;-->
+
+    <!--<color name="secondary_text_disabled_material_dark">#7f0a002d</color> &lt;!&ndash; White 87% &ndash;&gt;-->
+    <!--<color name="secondary_text_disabled_material_light">#7f0a002e</color> &lt;!&ndash; White 38% &ndash;&gt;-->
+
+    <color name="secondary_text_material_light">#8a000000</color> <!-- Black 54% -->
+
+    <!--<color name="primary_text_default_material_dark">#deffffff</color> &lt;!&ndash; White 87% &ndash;&gt;-->
+    <color name="secondary_text_material_dark">#61ffffff</color> <!-- White 38% -->
+
     <color name="colorPrimary">#01897f</color>
     <color name="colorPrimaryDark">#00867d</color>
     <color name="colorAccent">#4db6ac</color>
     <color name="text_black">#252525</color>
 
     <color name="white">#ffffff</color>
+
+    <color name="priority_high">#e57373</color>
+    <color name="priority_normal">#81c784</color>
+    <color name="priority_low">#4fc3f7</color>
+
+    <color name="priority_high_selected">#ffcdd2</color>
+    <color name="priority_normal_selected">#c8e6c9</color>
+    <color name="priority_low_selected">#b3e5fc</color>
+
+    <color name="gray_50">#FAFAFA</color>
+    <color name="gray_200">#EEEEEE</color>
+
 </resources>

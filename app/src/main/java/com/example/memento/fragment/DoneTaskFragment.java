@@ -17,11 +17,7 @@ import com.example.memento.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DoneTaskFragment extends Fragment {
-
-    private RecyclerView rvDoneTasks;
-    private RecyclerView.LayoutManager layoutManager;
-
+public class DoneTaskFragment extends TaskFragment {
 
     public DoneTaskFragment() {
         // Required empty public constructor
@@ -34,11 +30,11 @@ public class DoneTaskFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_done_task, container, false);
 
-        rvDoneTasks = rootView.findViewById(R.id.rvDoneTask);
+        recyclerView = rootView.findViewById(R.id.rvDoneTask);
 
         layoutManager = new LinearLayoutManager(getActivity());
 
-        rvDoneTasks.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
 
         // Inflate the layout for this fragment
         return rootView;

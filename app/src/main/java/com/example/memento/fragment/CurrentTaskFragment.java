@@ -1,7 +1,6 @@
 package com.example.memento.fragment;
 
 
-import android.graphics.ColorSpace;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,12 +19,12 @@ import com.example.memento.model.ModelTask;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CurrentTaskFragment extends Fragment {
+public class CurrentTaskFragment extends TaskFragment {
 
-    private RecyclerView rvCurrentTasks;
+    private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
 
-    private CurrentTaskAdapter adapter;
+    //private CurrentTaskAdapter adapter;
 
 
     public CurrentTaskFragment() {
@@ -39,34 +38,16 @@ public class CurrentTaskFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_current_task, container, false);
 
-        rvCurrentTasks = rootView.findViewById(R.id.rvCurrentTask);
+        recyclerView = rootView.findViewById(R.id.rvCurrentTask);
         layoutManager = new LinearLayoutManager(getActivity());
-        rvCurrentTasks.setLayoutManager(layoutManager);
-        adapter = new CurrentTaskAdapter();
-        rvCurrentTasks.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new CurrentTaskAdapter(this);
+        recyclerView.setAdapter(adapter);
 
         // Inflate the layout for this fragment
         return rootView;
     }
 
-    public void addTask(ModelTask newTask){
-        int position = -1;
 
-        for (int i = 0; i < adapter.getItemCount(); i++){
-            if(adapter.getItem(i).isTask()) {
-                ModelTask task = (ModelTask) adapter.getItem(i);
-                if(newTask.getDate() < task.getDate()) {
-                    position = i;
-                    break;
-                }
-            }
-        }
-
-        if ( position != -1 ) {
-            adapter.addItem(position, newTask);
-        } else {
-            adapter.addItem(newTask);
-        }
-    }
 
 }
