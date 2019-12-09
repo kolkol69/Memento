@@ -13,22 +13,29 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.memento.adapter.TabAdapter;
+import com.example.memento.database.DBHelper;
 import com.example.memento.dialog.AddingTaskDialogFragment;
 import com.example.memento.fragment.CurrentTaskFragment;
 import com.example.memento.fragment.DoneTaskFragment;
+import com.example.memento.fragment.TaskFragment;
 import com.example.memento.model.ModelTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity
-        implements AddingTaskDialogFragment.AddingTaskListener {
+        implements AddingTaskDialogFragment.AddingTaskListener,
+        CurrentTaskFragment.OnTaskDoneListener,
+         DoneTaskFragment.OnTaskRestoreListener {
 
     FragmentManager fragmentManager;
+
     PreferenceHelper preferenceHelper;
     TabAdapter tabAdapter;
 
-    CurrentTaskFragment currentTaskFragment;
-    DoneTaskFragment doneTaskFragment;
+    TaskFragment currentTaskFragment;
+    TaskFragment doneTaskFragment;
+
+    public DBHelper dbHelper;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,6 +55,8 @@ public class MainActivity extends AppCompatActivity
 
         PreferenceHelper.getInstance().init(getApplicationContext());
         preferenceHelper = PreferenceHelper.getInstance();
+
+        dbHelper = new DBHelper(getApplicationContext());
 
         fragmentManager = getSupportFragmentManager();
 
@@ -101,7 +110,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        currentTaskFragment = (CurrentTaskFragment)tabAdapter.getItem(TabAdapter.CURRENNT_TASK_FRAGMENNT_POSITION);
+        currentTaskFragment = (CurrentTaskFragment) tabAdapter.getItem(TabAdapter.CURRENNT_TASK_FRAGMENNT_POSITION);
         doneTaskFragment = (DoneTaskFragment) tabAdapter.getItem(TabAdapter.DONE_TASK_FRAGMENNT_POSITION);
 
 
@@ -115,14 +124,25 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+
     @Override
     public void onTaskAdded(ModelTask newTask) {
-        currentTaskFragment.addTask(newTask);
+        currentTaskFragment.addTask(newTask, true);
+    }
+
+    @Override
+    public void onTaskDone(ModelTask newTask) {
+        doneTaskFragment.addTask(newTask, false);
+    }
+
+    @Override
+    public void onTaskRestore(ModelTask newTask) {
+        currentTaskFragment.addTask(newTask, false);
     }
 
     @Override
     public void onTaskAddingCancel() {
         Toast.makeText(this, "Task wasn't added!", Toast.LENGTH_LONG).show();
-
     }
+
 }

@@ -1,19 +1,36 @@
 package com.example.memento.fragment;
 
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.memento.adapter.CurrentTaskAdapter;
+import com.example.memento.MainActivity;
+import com.example.memento.adapter.TaskAdapter;
 import com.example.memento.model.ModelTask;
 
-public class TaskFragment extends Fragment {
+public abstract class TaskFragment extends Fragment {
 
     protected RecyclerView recyclerView;
     protected RecyclerView.LayoutManager layoutManager;
 
-    protected CurrentTaskAdapter adapter;
+    protected TaskAdapter adapter;
 
-    public void addTask(ModelTask newTask){
+    public MainActivity activity;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (getActivity() != null) {
+            activity = (MainActivity) getActivity();
+        }
+
+        addTaskFromDB();
+    }
+
+    public void addTask(ModelTask newTask, boolean saveToDB){
         int position = -1;
         for (int i = 0; i < adapter.getItemCount(); i++){
             if(adapter.getItem(i).isTask()) {
@@ -30,5 +47,12 @@ public class TaskFragment extends Fragment {
         } else {
             adapter.addItem(newTask);
         }
+
+        if ( saveToDB ) {
+            activity.dbHelper.saveTask(newTask);
+        }
     }
+
+    public abstract void addTaskFromDB();
+    public abstract void moveTask(ModelTask task);
 }

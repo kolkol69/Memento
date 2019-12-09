@@ -15,7 +15,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public abstract class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<Item> items;
+    public List<Item> items;
 
     TaskFragment taskFragment;
 
