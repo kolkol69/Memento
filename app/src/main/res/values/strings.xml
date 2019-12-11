@@ -24,4 +24,9 @@
     <string name="chanel_name">Reminder channel</string>
     <string name="chanel_description">Reminder notifications</string>
 
+    <string name="separator_overdue">Overdue</string>
+    <string name="separator_today">Today</string>
+    <string name="separator_tomorrow">Tomorrow</string>
+    <string name="separator_future">Future</string>
+
 </resources>

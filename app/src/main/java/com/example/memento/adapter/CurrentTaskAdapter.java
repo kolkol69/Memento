@@ -19,8 +19,11 @@ import com.example.memento.Utils;
 import com.example.memento.fragment.CurrentTaskFragment;
 import com.example.memento.fragment.TaskFragment;
 import com.example.memento.model.Item;
+import com.example.memento.model.ModelSeparator;
 import com.example.memento.model.ModelTask;
 
+
+import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -48,6 +51,12 @@ public class CurrentTaskAdapter extends TaskAdapter {
                 CircleImageView priority = v.findViewById(R.id.cvTaskPriority);
 
                 return new TaskViewHolder(v, title, date, priority);
+            case TYPE_SEPARATOR:
+                View separator = LayoutInflater.from(viewGroup.getContext())
+                        .inflate(R.layout.model_separator, viewGroup, false);
+                TextView type = separator.findViewById(R.id.tvSeparatorName);
+
+                return new SeparatorViewHolder(separator, type);
             default:
                 return null;
 
@@ -58,6 +67,8 @@ public class CurrentTaskAdapter extends TaskAdapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
 
         Item item = items.get(position);
+        final Resources resources = viewHolder.itemView.getResources();
+
 
         if (item.isTask()) {
             viewHolder.itemView.setEnabled(true);
@@ -67,7 +78,6 @@ public class CurrentTaskAdapter extends TaskAdapter {
             taskViewHolder.title.setText(task.getTitle());
 
             final View itemView = taskViewHolder.itemView;
-            final Resources resources = itemView.getResources();
 
             if (task.getDate() != 0) {
                 taskViewHolder.date.setText(Utils.getFullDate(task.getDate()));
@@ -179,6 +189,11 @@ public class CurrentTaskAdapter extends TaskAdapter {
                     flipIn.start();
                 }
             });
+
+        } else {
+            ModelSeparator separator = (ModelSeparator) item;
+            SeparatorViewHolder separatorViewHolder = (SeparatorViewHolder) viewHolder;
+            separatorViewHolder.type.setText(resources.getString(separator.getType()));
 
         }
 
