@@ -38,18 +38,14 @@ public class DBUpdateManager {
     }
 
     private int update(String column, long key, String value) {
-        Log.d(">>>String",""+value);
         ContentValues cv = new ContentValues();
         cv.put(column, value);
         return database.update(DBHelper.TASK_TABLE, cv, DBHelper.TASK_TIME_STAMP_COLUMN + " = " + key, null);
-        //Log.d(">>>String",""+database.toString());
     }
 
     private void update(String column, long key, long value) {
-        Log.d(">>>long",""+key);
         ContentValues cv = new ContentValues();
         cv.put(column, value);
-        int affected = database.update(DBHelper.TASK_TABLE, cv, DBHelper.TASK_TIME_STAMP_COLUMN + " = " + key, null);
-        Log.d(">>>affected","RESULT: "+affected);
+        database.update(DBHelper.TASK_TABLE, cv, DBHelper.TASK_TIME_STAMP_COLUMN + " = " + key, null);
     }
 }

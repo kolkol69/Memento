@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/search_view"
                     app:theme="@style/Theme.AppCompat.NoActionBar"
-                    ></androidx.appcompat.widget.SearchView>
+                    />
 
             </androidx.appcompat.widget.Toolbar>
 
