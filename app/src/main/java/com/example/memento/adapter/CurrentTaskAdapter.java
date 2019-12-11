@@ -5,7 +5,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.res.Resources;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memento.R;
 import com.example.memento.Utils;
 import com.example.memento.fragment.CurrentTaskFragment;
-import com.example.memento.fragment.TaskFragment;
 import com.example.memento.model.Item;
 import com.example.memento.model.ModelSeparator;
 import com.example.memento.model.ModelTask;
 
-
-import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

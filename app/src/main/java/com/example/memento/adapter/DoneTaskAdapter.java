@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memento.R;
 import com.example.memento.Utils;
-import com.example.memento.adapter.TaskAdapter;
 import com.example.memento.fragment.DoneTaskFragment;
-import com.example.memento.fragment.TaskFragment;
 import com.example.memento.model.Item;
 import com.example.memento.model.ModelTask;
 

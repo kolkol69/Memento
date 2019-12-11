@@ -2,7 +2,6 @@ package com.example.memento.database;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.memento.model.ModelTask;
 

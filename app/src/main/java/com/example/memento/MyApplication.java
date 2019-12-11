@@ -1,6 +1,5 @@
 package com.example.memento;
 
-import android.app.AppComponentFactory;
 import android.app.Application;
 
 public class MyApplication  extends Application {
