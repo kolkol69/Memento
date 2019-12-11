@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memento.R;
 import com.example.memento.Utils;
+import com.example.memento.fragment.CurrentTaskFragment;
 import com.example.memento.fragment.TaskFragment;
 import com.example.memento.model.Item;
 import com.example.memento.model.ModelTask;
@@ -26,7 +28,7 @@ public class CurrentTaskAdapter extends TaskAdapter {
     private static final int TYPE_TASK = 0;
     private static final int TYPE_SEPARATOR = 1;
 
-    public CurrentTaskAdapter(TaskFragment taskFragment) {
+    public CurrentTaskAdapter(CurrentTaskFragment taskFragment) {
         super(taskFragment);
     }
 
@@ -83,9 +85,16 @@ public class CurrentTaskAdapter extends TaskAdapter {
             taskViewHolder.priority.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Log.println(
+                            1,
+                            "CurrenntTaskAdapter",
+                            "1>>>>>>.priority" + task.getStatus() + " title:" +task.getTitle());
                     task.setStatus(ModelTask.STATUS_DONE);
                     getTaskFragment().activity.dbHelper.update().status(task.getTimeStamp(), ModelTask.STATUS_DONE);
+
+                    Log.d(
+                            "CurrenntTaskAdapter",
+                            "2>>>>>>.priority" + task.getStatus() + " title:" +task.getTitle());
 
                     itemView.setBackgroundColor(resources.getColor(R.color.gray_200));
 

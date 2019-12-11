@@ -16,13 +16,13 @@ public class DBQueryManager {
         this.database = database;
     }
 
-    public List<ModelTask> getTasks(String selection, String[] selectionnArgs, String orderBy){
+    public List<ModelTask> getTasks(String selection, String[] selectionArgs, String orderBy){
         List<ModelTask> tasks = new ArrayList<>();
         Cursor c = database.query(
                 DBHelper.TASK_TABLE,
                 null,
                 selection,
-                selectionnArgs,
+                selectionArgs,
                 null,
                 null,
                 orderBy
