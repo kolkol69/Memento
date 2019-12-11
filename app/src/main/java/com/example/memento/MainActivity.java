@@ -1,6 +1,7 @@
 package com.example.memento;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity
 
     TaskFragment currentTaskFragment;
     TaskFragment doneTaskFragment;
+
+    SearchView searchView;
 
     public DBHelper dbHelper;
 
@@ -112,6 +115,22 @@ public class MainActivity extends AppCompatActivity
 
         currentTaskFragment = (CurrentTaskFragment) tabAdapter.getItem(TabAdapter.CURRENNT_TASK_FRAGMENNT_POSITION);
         doneTaskFragment = (DoneTaskFragment) tabAdapter.getItem(TabAdapter.DONE_TASK_FRAGMENNT_POSITION);
+
+        searchView = findViewById(R.id.search_view);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                currentTaskFragment.findTasks(newText);
+                doneTaskFragment.findTasks(newText);
+                return false;
+            }
+        });
 
 
         FloatingActionButton fab = findViewById(R.id.fab);

@@ -36,7 +36,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp"
                 app:layout_scrollFlags="scroll|enterAlways"
-                />
+                >
+
+                <androidx.appcompat.widget.SearchView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/search_view"
+                    app:theme="@style/Theme.AppCompat.NoActionBar"
+                    ></androidx.appcompat.widget.SearchView>
+
+            </androidx.appcompat.widget.Toolbar>
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
