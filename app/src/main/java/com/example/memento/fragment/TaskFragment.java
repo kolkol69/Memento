@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memento.MainActivity;
 import com.example.memento.R;
 import com.example.memento.adapter.TaskAdapter;
+import com.example.memento.alarm.AlarmHelper;
 import com.example.memento.model.Item;
 import com.example.memento.model.ModelTask;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,6 +26,8 @@ public abstract class TaskFragment extends Fragment {
 
     public MainActivity activity;
 
+    public AlarmHelper alarmHelper;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -32,6 +35,8 @@ public abstract class TaskFragment extends Fragment {
         if (getActivity() != null) {
             activity = (MainActivity) getActivity();
         }
+
+        alarmHelper = AlarmHelper.getInstance();
 
         addTaskFromDB();
     }
@@ -93,6 +98,7 @@ public abstract class TaskFragment extends Fragment {
                         @Override
                         public void onViewDetachedFromWindow(View v) {
                             if (isRemoved[0]) {
+                                alarmHelper.removeAlarm(timeStamp);
                                 activity.dbHelper.removeTask(timeStamp);
                             }
                         }

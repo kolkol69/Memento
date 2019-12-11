@@ -21,4 +21,7 @@
     <string name="dialog_removing_message">Do you really want to delete task?</string>
     <string name="removed">Removed</string>
 
+    <string name="chanel_name">Reminder channel</string>
+    <string name="chanel_description">Reminder notifications</string>
+
 </resources>

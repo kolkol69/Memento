@@ -124,6 +124,7 @@ public class CurrentTaskFragment extends TaskFragment {
 
     @Override
     public void moveTask(ModelTask task) {
+        alarmHelper.removeAlarm(task.getTimeStamp());
         onTaskDoneListener.onTaskDone(task);
     }
 }

@@ -7,6 +7,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.memento.adapter.TabAdapter;
+import com.example.memento.alarm.AlarmHelper;
 import com.example.memento.database.DBHelper;
 import com.example.memento.dialog.AddingTaskDialogFragment;
 import com.example.memento.fragment.CurrentTaskFragment;
@@ -40,6 +44,34 @@ public class MainActivity extends AppCompatActivity
 
     public DBHelper dbHelper;
 
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.chanel_name);
+            String description = getString(R.string.chanel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("M_CH_ID", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MyApplication.activityPaused();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -58,6 +90,9 @@ public class MainActivity extends AppCompatActivity
 
         PreferenceHelper.getInstance().init(getApplicationContext());
         preferenceHelper = PreferenceHelper.getInstance();
+        createNotificationChannel();
+
+        AlarmHelper.getInstance().init(getApplicationContext());
 
         dbHelper = new DBHelper(getApplicationContext());
 
